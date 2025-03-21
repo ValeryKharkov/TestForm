@@ -12,6 +12,12 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Selenium WebDriver
+    implementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
+    // WebDriver для Chrome (ChromeDriver)
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.10.0'
+    // TestNG для тестирования (опционально)
+    testImplementation 'org.testng:testng:7.8.0'
 }
 
 test {
