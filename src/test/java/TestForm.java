@@ -21,8 +21,6 @@ public class TestForm {
     public static final String XPATH_POPUP_OK_BUTTON = "//button[contains(text(), 'Ok')]";
 
 
-
-
     @BeforeEach
     public void beforeTest() {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
