@@ -1,7 +1,5 @@
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,8 +23,8 @@ public class TestForm {
 
 
 
-    @BeforeAll
-    public static void beforeTest() {
+    @BeforeEach
+    public void beforeTest() {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -34,8 +32,7 @@ public class TestForm {
     }
 
     @Test
-    @Order(1)
-    public void testLoginForm() {
+    public void loginFormTest() {
         WebElement emailField = driver.findElement(By.id("loginEmail"));
         WebElement passwordField = driver.findElement(By.id("loginPassword"));
         WebElement loginButton = driver.findElement(By.id("authButton"));
@@ -48,8 +45,7 @@ public class TestForm {
     }
 
     @Test()
-    @Order(2)
-    public void testDataForm() {
+    public void inputFormTest() {
         WebElement dataEmail = driver.findElement(By.id("dataEmail"));
         WebElement dataName = driver.findElement(By.id("dataName"));
         WebElement dataGender = driver.findElement(By.id("dataGender"));
@@ -64,13 +60,13 @@ public class TestForm {
         dataName.sendKeys("User");
         // TODO реализовать выбор гендера из выпадающего списка, а не подстановкой значения
 
-        Select genderSelect = new Select(dataGender);
-        genderSelect.selectByVisibleText("Мужской");
+//        Select genderSelect = new Select(dataGender);
+//        genderSelect.selectByVisibleText("Мужской");
 
-//            dataGender.click();
-//            dataGender.sendKeys("Женский");
-//            dataGender.click();
-//            dataGender.sendKeys("Мужской");
+        dataGender.click();
+        dataGender.sendKeys("Женский");
+        dataGender.click();
+        dataGender.sendKeys("Мужской");
         dataCheck11.click();
         dataCheck12.click();
         dataSelect21.click();
@@ -78,16 +74,15 @@ public class TestForm {
         dataSelect23.click();
         dataSendButton.click();
 
-        // TODO Добавить xpath в enum файл
-        WebElement popup = driver.findElement(By.xpath(XPATH_POPUP));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_POPUP)));
         WebElement popupOkButton = driver.findElement(By.xpath(XPATH_POPUP_OK_BUTTON));
-        popup.getText().equals("Данные добавлены.");
+        assertEquals("Данные добавлены.", popup.getText());
         popupOkButton.click();
     }
 
     @Test()
-    @Order(3)
-    public void checkTable() {
+    public void checkTableTest() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement tableRow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_DATA_TABLE)));
 //        WebElement tableRow = driver.findElement(By.xpath("//table[@id='dataTable']/tbody/tr"));
@@ -99,8 +94,8 @@ public class TestForm {
         assertTrue(tableRow.getText().contains("2.3"));
     }
 
-    @AfterAll
-    public static void quitBrowser() {
+    @AfterEach
+    public void afterTest() {
         if (driver != null) {
             driver.quit();
         }
