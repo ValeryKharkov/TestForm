@@ -11,6 +11,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// TODO Проверить порядок запуска методов
 public class TestFormModule {
     private static WebDriver driver;
     public static final String CHROME_DRIVER_PATH = "/usr/local/bin/chromedriver";
