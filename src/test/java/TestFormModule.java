@@ -5,14 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestForm {
+public class TestFormModule {
     private static WebDriver driver;
     public static final String CHROME_DRIVER_PATH = "/usr/local/bin/chromedriver";
     public static final String TEST_PAGE_URL = "file:/home/valery/IdeaProjects/TestForm/src/test/resources/qa-test.html";
