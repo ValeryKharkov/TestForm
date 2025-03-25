@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
@@ -45,7 +46,7 @@ public class TestFormModule {
 
     @Test()
     @Order(2)
-    public void inputFormTest() {
+    public void profileFormTest() {
         WebElement dataEmail = driver.findElement(By.id("dataEmail"));
         WebElement dataName = driver.findElement(By.id("dataName"));
         WebElement dataGender = driver.findElement(By.id("dataGender"));
@@ -58,15 +59,10 @@ public class TestFormModule {
 
         dataEmail.sendKeys("user@example.com");
         dataName.sendKeys("User");
-        // TODO реализовать выбор гендера из выпадающего списка, а не подстановкой значения
 
-//        Select genderSelect = new Select(dataGender);
-//        genderSelect.selectByVisibleText("Мужской");
+        Select genderSelect = new Select(dataGender);
+        genderSelect.selectByVisibleText("Мужской");
 
-        dataGender.click();
-        dataGender.sendKeys("Женский");
-        dataGender.click();
-        dataGender.sendKeys("Мужской");
         dataCheck11.click();
         dataCheck12.click();
         dataSelect21.click();
