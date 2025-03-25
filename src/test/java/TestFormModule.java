@@ -1,18 +1,19 @@
 import org.junit.jupiter.api.*;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// TODO Проверить порядок запуска методов
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestFormModule {
+    /**
+     * Реализация модульного теста формы
+     */
     private static WebDriver driver;
     public static final String CHROME_DRIVER_PATH = "/usr/local/bin/chromedriver";
     public static final String TEST_PAGE_URL = "file:/home/valery/IdeaProjects/TestForm/src/test/resources/qa-test.html";
@@ -20,9 +21,8 @@ public class TestFormModule {
     public static final String XPATH_POPUP = "//div[@class='uk-margin uk-modal-content' and contains(text(), 'Данные добавлены.')]";
     public static final String XPATH_POPUP_OK_BUTTON = "//button[contains(text(), 'Ok')]";
 
-
-    @BeforeEach
-    public void beforeTest() {
+    @BeforeAll
+    public static void beforeTest() {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -30,6 +30,7 @@ public class TestFormModule {
     }
 
     @Test
+    @Order(1)
     public void loginFormTest() {
         WebElement emailField = driver.findElement(By.id("loginEmail"));
         WebElement passwordField = driver.findElement(By.id("loginPassword"));
@@ -43,6 +44,7 @@ public class TestFormModule {
     }
 
     @Test()
+    @Order(2)
     public void inputFormTest() {
         WebElement dataEmail = driver.findElement(By.id("dataEmail"));
         WebElement dataName = driver.findElement(By.id("dataName"));
@@ -80,6 +82,7 @@ public class TestFormModule {
     }
 
     @Test()
+    @Order(3)
     public void checkTableTest() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement tableRow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_DATA_TABLE)));
@@ -92,8 +95,8 @@ public class TestFormModule {
         assertTrue(tableRow.getText().contains("2.3"));
     }
 
-    @AfterEach
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         if (driver != null) {
             driver.quit();
         }

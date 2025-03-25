@@ -7,9 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class TestFormMonolithic {
+    /**
+     * Реализация монолитного теста формы. Предшественник класса TestFormModule
+     */
 
     @Test
-    public void testLogin() {
+    public void formTest() {
         String CHROME_DRIVER_PATH = "/usr/local/bin/chromedriver";
         String TEST_PAGE_URL = "file:/home/valery/IdeaProjects/TestForm/src/test/resources/qa-test.html";
         String XPATH_DATA_TABLE = "//table[@id='dataTable']/tbody/tr";
@@ -47,7 +50,6 @@ public class TestFormMonolithic {
 
         dataEmail.sendKeys("user@example.com");
         dataName.sendKeys("User");
-        // TODO реализовать выбор гендера из выпадающего списка
         dataGender.click();
         dataGender.sendKeys("Женский");
         dataGender.click();
